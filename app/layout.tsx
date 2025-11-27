@@ -1,39 +1,39 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import SiteHeader from '../components/SiteHeader'
-import SiteFooter from '../components/SiteFooter'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://shiftby.in'
+// Removed unnecessary React import
+import "../theme/theme";
+import ThemeRegistry from "../theme/ThemeRegistry";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: 'Shiftby',
-    template: '%s | Shiftby',
-  },
-  description: 'Shiftby training platform',
-  openGraph: {
-    url: siteUrl,
-    siteName: 'Shiftby',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-  },
+export const metadata = {
+  title: "Shiftby — Support your work and career in a changing world",
+  description:
+    "Shiftby helps professionals feel more confident and capable with practical AI-supported learning.",
+};
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <ThemeRegistry>
+          <Header />
+          <main style={{ padding: "16px", paddingTop: "72px" }}>{children}</main>
+          <Footer />
+        </ThemeRegistry>
+      </body>
+    </html>
+  );
 }
-
-export const viewport = {
-  themeColor: '#1976d2',
-}
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column' }}>
-        <SiteHeader />
-        <main style={{ flex: 1 }}>{children}</main>
-        <SiteFooter />
+      <body>
+        <ThemeRegistry>
+          <Header />
+          <main style={{ padding: "16px", paddingTop: "72px" }}>{children}</main>
+          <Footer />
+        </ThemeRegistry>
       </body>
     </html>
-  )
+  );
 }
